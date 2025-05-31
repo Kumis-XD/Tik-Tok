@@ -20,8 +20,8 @@
       "dest": "public/$1"
     },
     {
-      "source": "/instagram",
-      "destination": "/instagram.html"
+      "src": "/instagram",
+      "dest": "/instagram.html"
     }
   ]
 }
