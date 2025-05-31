@@ -16,8 +16,24 @@
       "dest": "server.js"
     },
     {
+      "src": "/instagram",
+      "dest": "public/instagram.html"
+    },
+    {
       "src": "/(.*)",
       "dest": "public/$1"
     }
-  ]
+  ],
+  "headers": [
+    {
+      "source": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg))",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "outputDirectory": "public"
 }
