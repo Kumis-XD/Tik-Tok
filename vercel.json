@@ -16,7 +16,7 @@
       "dest": "server.js"
     },
     {
-      "src": "/instagram/?",
+      "src": "/instagram",
       "dest": "public/instagram.html"
     },
     {
