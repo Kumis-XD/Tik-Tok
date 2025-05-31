@@ -11,7 +11,13 @@ const global = { author: 'Padz, Xio (Distributor)' };
 
 app.use(compression());
 app.use(express.json({ limit: '1mb' }));
-app.use(express.static('public'));
+app.use(express.static('public', {
+  setHeaders: (res, path) => {
+    if (path.match(/\.(css|js|png|jpg|jpeg|gif|svg)$/)) {
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    }
+  }
+}));
 
 // Terapkan retry untuk semua permintaan axios
 // axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay });
