@@ -3,61 +3,105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TikTok Stalker</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Flowbite CDN -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+  <title>Stalker Dashboard</title>
+  <link href="/styles.css" rel="stylesheet" />
+  <script src="/flowbite.min.js"></script>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900">
-  <nav class="bg-white dark:bg-gray-800 shadow-md">
-    <div class="container mx-auto p-4 flex justify-between items-center">
-      <h1 class="text-xl font-bold text-gray-800 dark:text-white">Stalker App</h1>
-      <div class="space-x-4">
-        <a href="/index.html" class="text-indigo-600 dark:text-indigo-400 hover:underline">TikTok</a>
-        <a href="/instagram" class="text-indigo-600 dark:text-indigo-400 hover:underline">Instagram</a>
+<body class="bg-gray-100 dark:bg-gray-900 font-sans">
+  <!-- Sidebar -->
+  <div class="flex h-screen">
+    <aside class="w-64 bg-white dark:bg-gray-800 shadow-md">
+      <div class="p-4">
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Stalker App</h2>
+        <nav>
+          <a href="#tiktok" class="block py-2 px-4 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition duration-200" onclick="showSection('tiktok')">TikTok</a>
+          <a href="#instagram" class="block py-2 px-4 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition duration-200" onclick="showSection('instagram')">Instagram</a>
+        </nav>
       </div>
-    </div>
-  </nav>
-  <div class="container mx-auto p-4">
-    <h1 class="text-3xl font-bold text-center text-gray-800 dark:text-white mb-6">TikTok Stalker</h1>
-    <div class="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-      <form id="stalkForm" class="space-y-4">
-        <div>
-          <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Username TikTok</label>
-          <input type="text" id="username" name="username" placeholder="@username" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6 overflow-y-auto">
+      <!-- TikTok Section -->
+      <section id="tiktok" class="space-y-6">
+        <h1 class="text-3xl font-bold text-gray-800 dark:text-white">TikTok Stalker</h1>
+        <div class="max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+          <form id="tiktokForm" class="space-y-4">
+            <div>
+              <label for="tiktokUsername" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Username TikTok</label>
+              <input type="text" id="tiktokUsername" name="tiktokUsername" placeholder="@username" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
+            </div>
+            <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Cari</button>
+          </form>
         </div>
-        <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Cari</button>
-      </form>
-    </div>
 
-    <!-- Loading Spinner -->
-    <div id="loading" class="mt-6 max-w-md mx-auto hidden">
-      <div class="flex justify-center items-center">
-        <div class="animate-spin inline-block w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full" role="status">
-          <span class="sr-only">Memuat...</span>
+        <!-- Loading Spinner -->
+        <div id="tiktokLoading" class="max-w-md hidden">
+          <div class="flex justify-center items-center">
+            <div class="animate-spin inline-block w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full" role="status">
+              <span class="sr-only">Memuat...</span>
+            </div>
+            <span class="ml-2 text-gray-800 dark:text-white">Memuat data...</span>
+          </div>
         </div>
-        <span class="ml-2 text-gray-800 dark:text-white">Memuat data...</span>
-      </div>
-    </div>
 
-    <!-- Hasil -->
-    <div id="result" class="mt-6 max-w-md mx-auto hidden">
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-        <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Informasi Pengguna</h2>
-        <div id="userInfo"></div>
-      </div>
-    </div>
+        <!-- Hasil -->
+        <div id="tiktokResult" class="max-w-md hidden">
+          <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Informasi Pengguna</h2>
+            <div id="tiktokUserInfo"></div>
+          </div>
+        </div>
 
-    <!-- Error -->
-    <div id="error" class="mt-6 max-w-md mx-auto hidden">
-      <div class="bg-red-100 dark:bg-red-900 border-l-4 border-red-500 dark:border-red-700 text-red-700 dark:text-red-200 p-4" role="alert">
-        <p id="errorMessage"></p>
-      </div>
-    </div>
+        <!-- Error -->
+        <div id="tiktokError" class="max-w-md hidden">
+          <div class="bg-red-100 dark:bg-red-900 border-l-4 border-red-500 dark:border-red-700 text-red-700 dark:text-red-200 p-4" role="alert">
+            <p id="tiktokErrorMessage"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Instagram Section -->
+      <section id="instagram" class="space-y-6 hidden">
+        <h1 class="text-3xl font-bold text-gray-800 dark:text-white">Instagram Stalker</h1>
+        <div class="max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+          <form id="instagramForm" class="space-y-4">
+            <div>
+              <label for="instagramUsername" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Username Instagram</label>
+              <input type="text" id="instagramUsername" name="instagramUsername" placeholder="@username" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
+            </div>
+            <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Cari</button>
+          </form>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="instagramLoading" class="max-w-md hidden">
+          <div class="flex justify-center items-center">
+            <div class="animate-spin inline-block w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full" role="status">
+              <span class="sr-only">Memuat...</span>
+            </div>
+            <span class="ml-2 text-gray-800 dark:text-white">Memuat data...</span>
+          </div>
+        </div>
+
+        <!-- Hasil -->
+        <div id="instagramResult" class="max-w-md hidden">
+          <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Informasi Pengguna</h2>
+            <div id="instagramUserInfo"></div>
+          </div>
+        </div>
+
+        <!-- Error -->
+        <div id="instagramError" class="max-w-md hidden">
+          <div class="bg-red-100 dark:bg-red-900 border-l-4 border-red-500 dark:border-red-700 text-red-700 dark:text-red-200 p-4" role="alert">
+            <p id="instagramErrorMessage"></p>
+          </div>
+        </div>
+      </section>
+    </main>
   </div>
 
-  <script src="/script.js"></script>
+  <script src="/script.min.js"></script>
 </body>
 </html>
