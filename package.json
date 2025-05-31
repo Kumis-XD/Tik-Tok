@@ -17,7 +17,7 @@
     "node-cache": "^5.1.2"
   },
   "engines": {
-    "node": "23.11.1"
+    "node": "22.0.0"
   },
   "description": ""
 }
