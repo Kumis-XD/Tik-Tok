@@ -21,7 +21,7 @@
     },
     {
       "src": "/instagram",
-      "dest": "/instagram.html"
+      "dest": "public/instagram.html"
     }
   ]
 }
